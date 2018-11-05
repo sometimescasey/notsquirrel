@@ -1,0 +1,11 @@
+chipmunk
+daisy
+dandelion
+humans
+mouse
+raccoon
+rat
+roses
+squirrel
+sunflowers
+tulips
