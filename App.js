@@ -12,7 +12,7 @@ export default class App extends Component<Props> {
 constructor() {
   super()
   this.image = require('./assets/squirrel2.jpg');
-  this.state = {result: "", confidence: "", photo: this.image}
+  this.state = {result: "", confidence: "", photo: ""}
 }
 
 componentDidMount() {
@@ -43,7 +43,7 @@ ImagePicker.showImagePicker(options, (response) => {
   } else {
     console.log("response.uri is:" + response.uri);
 
-    RNGRP.getRealPathFromURI(response.uri).then(path => console.log(path))
+    RNGRP.getRealPathFromURI(response.uri).then(path => console.log(path)).catch("Error: getRealPathFromURI( promise failed) ");
 
     }
   });
@@ -82,15 +82,15 @@ async recognizeImage() {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
+        <Text style={styles.welcome}>Is this a squirrel?</Text>
         <Image source={this.image} style={styles.image} />
         <Text style={styles.results}>{this.state.result}</Text>
         <Text style={styles.results}>{this.state.confidence}</Text>
         <Button
   onPress={this.askForPhoto}
-  title="Learn More"
+  title="Choose image"
   color="#841584"
-  accessibilityLabel="Learn more about this purple button"
+  accessibilityLabel="Press this button to choose a photo"
 />
 <Image source={this.state.photo} style={styles.image}/>
       </View>
