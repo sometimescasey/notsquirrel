@@ -6,7 +6,6 @@ import java.util.List;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.ReactActivity;
-import com.rngrp.RNGRPPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -21,7 +20,6 @@ public class MainActivity extends ReactActivity {
 
     protected List<ReactPackage> getPackages() {
     return Arrays.<ReactPackage>asList(
-            new MainReactPackage(),
-            new RNGRPPackage()); // <-- Add this line with your package name.
+            new MainReactPackage());
 }
 }

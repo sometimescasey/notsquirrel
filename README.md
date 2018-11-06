@@ -7,7 +7,7 @@ For now, just following in [Jinyang's](https://www.youtube.com/watch?v=vIci3C4Jk
 
 Uses the following resources and libraries:
 
-* A Tensorflow Lite graph retrained on images of squirrels and squirrel-like rodents, per the tutorial at [TensorFlow for Poets 2: TFLite Android](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2-tflite/#0)
+* `retrained_graph.pb` and `retrained_labels.txt` from a Tensorflow Lite graph retrained on images of squirrels and squirrel-like rodents, per the tutorial at [TensorFlow for Poets 2: TFLite Android](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2-tflite/#0)
 * A slightly modified fork of react-native-tensorflow ([Original](https://github.com/reneweb/react-native-tensorflow))([Fork](https://github.com/sometimescasey/react-native-tensorflow/tree/revision))
-* [react-native-get-real-path](https://github.com/Wraptime/react-native-get-real-path)
+* [react-native-fs](https://github.com/itinance/react-native-fs)
 * [react-native-image-picker](https://github.com/react-community/react-native-image-picker/)
