@@ -5,7 +5,6 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.rnfs.RNFSPackage;
 import com.imagepicker.ImagePickerPackage;
-import org.reactnative.camera.RNCameraPackage;
 import com.rntensorflow.RNTensorFlowPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -32,7 +31,6 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new RNFSPackage(),
             new ImagePickerPackage(),
-            new RNCameraPackage(),
             new RNTensorFlowPackage(),
             new CustomToastPackage()
       );
