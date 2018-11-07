@@ -61,7 +61,6 @@ haul-debug.log
 
 # Exclude gradle builds
 android/app/build/*
-android/app/src/main/res/*
 
 # Personal
 private_notes/*
