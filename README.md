@@ -11,3 +11,27 @@ Uses the following resources and libraries:
 * A slightly modified fork of react-native-tensorflow ([Original](https://github.com/reneweb/react-native-tensorflow))([Fork](https://github.com/sometimescasey/react-native-tensorflow/tree/revision))
 * [react-native-fs](https://github.com/itinance/react-native-fs)
 * [react-native-image-picker](https://github.com/react-community/react-native-image-picker/)
+
+# Building and Installing
+Run Bundler:
+```
+# from root folder
+
+react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+```
+
+Using Gradle to build the signed release APK (see https://facebook.github.io/react-native/docs/signed-apk-android.html):
+```
+cd android
+./gradlew assembleRelease
+```
+Test release APK:
+```
+react-native run-android --variant=release
+```
+
+Install to phone:
+```
+cd android
+./gradlew installRelease
+```
