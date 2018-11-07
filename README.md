@@ -16,7 +16,7 @@ Uses the following resources and libraries:
 Download the APK and install: (link tbd)
 
 # Build
-All commands should be run from the project root folder unless otherwise specified.
+All commands should be run on `master` from the project root folder unless otherwise specified.
 
 1) Install npm packages. Note that this project's `package.json` points to the modified forks.
 ```
