@@ -56,11 +56,9 @@ ImagePicker.showImagePicker(imagePickerOptions, (response) => {
     .then( (exists) => {
         if (exists) {
           // Handle library picker
-          // console.log("file at response.uri EXISTS");
           this.setState({photo: {uri: response.uri}}, ()=>{this.recognizeImage();});
         } else {
           // Handle photo taken from camera
-          // console.log("file at response.uri DOES NOT EXIST");
           RNFS.stat(response.uri).then((statResult) => {
             // console.log("real path: " + statResult.originalFilepath)
             var realPath = "file://" + statResult.originalFilepath
@@ -90,8 +88,7 @@ async recognizeImage() {
     maxResults: 3, //Optional, defaults to 3
     threshold: 0.1, //Optional, defaults to 0.1
     })
-        
-    console.log("Name: " + results[0].name + "\nConfidence: " + results[0].confidence)
+    
     const resultText = "Name: " + results[0].name
     const confidenceText = "Confidence: " + results[0].confidence
     this.setState({result: resultText})
@@ -113,7 +110,7 @@ async recognizeImage() {
         <Button
   onPress={this.askForPhoto}
   title="Choose photo"
-  color="#841584"
+  color="#00B6FF"
   accessibilityLabel="Press this button to choose a photo"
 />
       </View>
