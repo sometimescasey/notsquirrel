@@ -7,6 +7,9 @@ import { Button, Platform, StyleSheet, Text, View, Image } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { TfImageRecognition } from 'react-native-tensorflow';
 
+const GRAPH_FILE = './assets/retrained_graph.pb'
+const LABEL_FILE = './assets/retrained_labels.txt'
+
 type Props = {};
 export default class App extends Component<Props> {
 constructor() {
@@ -17,10 +20,11 @@ constructor() {
                 confidence: ""};
   // need to explicitly bind in order to be able to call this.setState inside askForPhoto
   // otherwise, setState doesn't know what "this" is (JS way of handling static vs instance functions)
-  this.askForPhoto = this.askForPhoto.bind(this); }
+  this.askForPhoto = this.askForPhoto.bind(this);
+}
 
 componentDidMount() {
-  this.recognizeImage()
+  this.recognizeImage();
 }
 
 askForPhoto() {
@@ -47,24 +51,24 @@ ImagePicker.showImagePicker(imagePickerOptions, (response) => {
     console.log('User tapped custom button: ', response.customButton);
   } else {
     console.log("response.uri is:" + response.uri);
-    // TODO: use react-native fs stat from https://github.com/itinance/react-native-fs/pull/480/files
-    // get originalFilepath on the StatResult
     
     RNFS.exists(response.uri)
     .then( (exists) => {
         if (exists) {
-          console.log("file at response.uri EXISTS");
+          // Handle library picker
+          // console.log("file at response.uri EXISTS");
           this.setState({photo: {uri: response.uri}}, ()=>{this.recognizeImage();});
         } else {
-          console.log("file at response.uri DOES NOT EXIST");
+          // Handle photo taken from camera
+          // console.log("file at response.uri DOES NOT EXIST");
           RNFS.stat(response.uri).then((statResult) => {
-            console.log("real path: " + statResult.originalFilepath)
+            // console.log("real path: " + statResult.originalFilepath)
             var realPath = "file://" + statResult.originalFilepath
             this.setState({photo: {uri: realPath}}, ()=>{this.recognizeImage();});
 
-          }).catch((err) => {console.log("RNFS stat problem: " + err)} ); 
+          }).catch((err) => {console.log("RNFS.stat() caught exception: " + err)} ); 
         }
-    });
+    }).catch((err) => {console.log("RNFS.exists() caught exception: " + err)} );
     }
   });
 }
@@ -72,28 +76,28 @@ ImagePicker.showImagePicker(imagePickerOptions, (response) => {
 async recognizeImage() {
   try {
     const tfImageRecognition = new TfImageRecognition({
-      model: require('./assets/retrained_graph.pb'),
-      labels: require('./assets/retrained_labels.txt'),
+      model: require(GRAPH_FILE),
+      labels: require(LABEL_FILE),
       imageMean: 117, // Optional, defaults to 117
       imageStd: 1 // Optional, defaults to 1
-  })
+});
+    
+    const results = await tfImageRecognition.recognize({
+    image: this.state.photo,
+    inputName: "input", //Optional, defaults to "input"
+    inputSize: 224, //Optional, defaults to 224
+    outputName: "final_result", //Optional, defaults to "output"
+    maxResults: 3, //Optional, defaults to 3
+    threshold: 0.1, //Optional, defaults to 0.1
+    })
+        
+    console.log("Name: " + results[0].name + "\nConfidence: " + results[0].confidence)
+    const resultText = "Name: " + results[0].name
+    const confidenceText = "Confidence: " + results[0].confidence
+    this.setState({result: resultText})
+    this.setState({confidence: confidenceText})
 
-  const results = await tfImageRecognition.recognize({
-  image: this.state.photo,
-  inputName: "input", //Optional, defaults to "input"
-  inputSize: 224, //Optional, defaults to 224
-  outputName: "final_result", //Optional, defaults to "output"
-  maxResults: 3, //Optional, defaults to 3
-  threshold: 0.1, //Optional, defaults to 0.1
-  })
-      
-  console.log("Name: " + results[0].name + "\nConfidence: " + results[0].confidence)
-  const resultText = "Name: " + results[0].name
-  const confidenceText = "Confidence: " + results[0].confidence
-  this.setState({result: resultText})
-  this.setState({confidence: confidenceText})
-
-  await tfImageRecognition.close()  
+    await tfImageRecognition.close()  
   } catch(err) {
     alert(err)
   }
