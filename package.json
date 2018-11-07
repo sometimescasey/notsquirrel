@@ -15,8 +15,8 @@
     "react": "16.6.0-alpha.8af6728",
     "react-native": "^0.57.4",
     "react-native-fs": "^2.12.1",
-    "react-native-image-picker": "^0.27.1",
-    "react-native-tensorflow": "file:../react-native-tensorflow"
+    "react-native-image-picker": "https://github.com/sometimescasey/react-native-image-picker/tarball/master",
+    "react-native-tensorflow": "https://github.com/sometimescasey/react-native-tensorflow/tarball/revision"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
