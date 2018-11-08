@@ -76,8 +76,8 @@ async recognizeImage() {
     const tfImageRecognition = new TfImageRecognition({
       model: require(GRAPH_FILE),
       labels: require(LABEL_FILE),
-      imageMean: 117, // Optional, defaults to 117
-      imageStd: 1 // Optional, defaults to 1
+      imageMean: 128, // match label_image.py from Tensorflow for Poets
+      imageStd: 128 // match label_image.py from Tensorflow for Poets
 });
     
     const results = await tfImageRecognition.recognize({
