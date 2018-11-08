@@ -59,8 +59,14 @@ buck-out/
 #
 haul-debug.log
 
-# Exclude gradle builds
+# Exclude gradle builds, exclude bundled copies of assets
 android/app/build/*
+android/app/src/main/assets/index.android.bundle
+android/app/src/main/res/raw/assets_retrained_graph.pb
+android/app/src/main/res/raw/assets_retrained_labels.txt
+
+# Exclude package-lock.json
+package-lock.json
 
 # Personal
 private_notes/*
