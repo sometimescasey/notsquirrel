@@ -12,6 +12,6 @@ module.exports = {
     getDevPaths(projectRoot).map($ => fs.realpathSync($))
   )),
   resolver: {
-    assetExts: ['pb', 'txt', 'jpg']
+    assetExts: ['pb', 'txt', 'jpg', 'png']
   }
 }

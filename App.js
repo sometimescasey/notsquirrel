@@ -3,21 +3,31 @@
  */
 
 import React, {Component} from 'react';
-import { Button, Platform, StyleSheet, Text, View, Image } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { TfImageRecognition } from 'react-native-tensorflow';
+import Header from './src/components/Header';
+import Button from './src/components/Button';
 
 const GRAPH_FILE = './assets/retrained_graph.pb'
 const LABEL_FILE = './assets/retrained_labels.txt'
+const IMAGE_MEAN = 128 // settings from TF for Poets
+const IMAGE_STD = 128 // // settings from TF for Poets
+
+const SQ_ORANGE = '#FF8700';
+const SQ_BLUE = '#00B6FF';
 
 type Props = {};
 export default class App extends Component<Props> {
 constructor() {
   super()
   this.initImage = require('./assets/squirrel2.jpg');
+  this.initCircle = require('./assets/circle_squirrel.png');
   this.state = {photo: this.initImage,
                 result: "",
-                confidence: ""};
+                confidence: "",
+                topCircle: this.initCircle,
+                topColor: SQ_BLUE};
   // need to explicitly bind in order to be able to call this.setState inside askForPhoto
   // otherwise, setState doesn't know what "this" is (JS way of handling static vs instance functions)
   this.askForPhoto = this.askForPhoto.bind(this);
@@ -71,13 +81,22 @@ ImagePicker.showImagePicker(imagePickerOptions, (response) => {
   });
 }
 
+processResult(firstResult) {
+  if (firstResult == "squirrel") {
+    this.setState({result: "SQUIRREL!", topColor: SQ_ORANGE})
+  }
+  else {
+    this.setState({result: "Not squirrel :(", topColor: SQ_BLUE})
+  }
+}
+
 async recognizeImage() {
   try {
     const tfImageRecognition = new TfImageRecognition({
       model: require(GRAPH_FILE),
       labels: require(LABEL_FILE),
-      imageMean: 128, // match label_image.py from Tensorflow for Poets
-      imageStd: 128 // match label_image.py from Tensorflow for Poets
+      imageMean: IMAGE_MEAN,
+      imageStd: IMAGE_STD
 });
     
     const results = await tfImageRecognition.recognize({
@@ -89,10 +108,8 @@ async recognizeImage() {
     threshold: 0.1, //Optional, defaults to 0.1
     })
     
-    const resultText = "Name: " + results[0].name
-    const confidenceText = "Confidence: " + results[0].confidence
-    this.setState({result: resultText})
-    this.setState({confidence: confidenceText})
+    this.processResult(results[0].name)
+    // const confidenceText = "Confidence: " + results[0].confidence
 
     await tfImageRecognition.close()  
   } catch(err) {
@@ -103,16 +120,31 @@ async recognizeImage() {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Is this a squirrel?</Text>
-        <Image source={this.state.photo} style={styles.image} />
+      <Header 
+      headerText={this.state.result}
+      customHeaderColor={this.state.topColor}/>
+      
+      <View style={styles.imageContainer}>
+        <Image source={this.state.photo} 
+        style={styles.imageStyle}
+        resizeMode={'cover'} />
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <Button 
+        whenPressed={() => this.askForPhoto()}>
+          Take / Choose Photo
+        </Button>
+      </View>
+      
+      <View style={styles.circleContainer}>
+        <Image source={this.state.topCircle} style={styles.topCircle} />
+      </View>
+        
         <Text style={styles.results}>{this.state.result}</Text>
         <Text style={styles.results}>{this.state.confidence}</Text>
-        <Button
-  onPress={this.askForPhoto}
-  title="Choose photo"
-  color="#00B6FF"
-  accessibilityLabel="Press this button to choose a photo"
-/>
+        
+
       </View>
     );
   }
@@ -121,22 +153,35 @@ async recognizeImage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flexDirection: 'column',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  topCircle: {
+    width: 80,
+    height: 80,
+    borderWidth: 2,
+    borderColor: '#FFFFFF',
+    borderRadius: 999,
   },
-  image: {
-    width: 150,
-    height: 100
+  circleContainer: {
+    top: 60, // todo: replace with calc based on screen size
+    left: 165, // todo: replace with calc based on screen size
+    position: 'absolute',
+  },
+  imageStyle: {
+    width: '100%',
+    height: '100%',
+  },
+  imageContainer: {
+    flex: 7,
+
+  },
+  buttonContainer: {
+    flex: 1,
+    alignContent: 'center',
+    backgroundColor: '#00B6FF',
   },
   results: {
+    display: 'none',
     textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
