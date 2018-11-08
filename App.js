@@ -22,11 +22,12 @@ export default class App extends Component<Props> {
 constructor() {
   super()
   this.initImage = require('./assets/squirrel2.jpg');
-  this.initCircle = require('./assets/circle_squirrel.png');
+  this.goodCircle = require('./assets/circle_squirrel.png');
+  this.badCircle = require('./assets/circle_notsquirrel.png');
   this.state = {photo: this.initImage,
                 result: "",
                 confidence: "",
-                topCircle: this.initCircle,
+                topCircle: this.goodCircle,
                 topColor: SQ_BLUE};
   // need to explicitly bind in order to be able to call this.setState inside askForPhoto
   // otherwise, setState doesn't know what "this" is (JS way of handling static vs instance functions)
@@ -83,10 +84,16 @@ ImagePicker.showImagePicker(imagePickerOptions, (response) => {
 
 processResult(firstResult) {
   if (firstResult == "squirrel") {
-    this.setState({result: "SQUIRREL!", topColor: SQ_ORANGE})
+    this.setState({
+      result: "SQUIRREL!", 
+      topColor: SQ_ORANGE,
+      topCircle: this.goodCircle})
   }
   else {
-    this.setState({result: "Not squirrel :(", topColor: SQ_BLUE})
+    this.setState({
+      result: "Not squirrel :(", 
+      topColor: SQ_BLUE,
+      topCircle: this.badCircle})
   }
 }
 
