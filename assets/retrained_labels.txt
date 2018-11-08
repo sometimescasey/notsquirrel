@@ -1,11 +1,12 @@
 chipmunk
-daisy
-dandelion
+flower bed
+grass
 humans
 mouse
+outdoors
+park bench
+plant
 raccoon
 rat
-roses
 squirrel
-sunflowers
-tulips
+tree
