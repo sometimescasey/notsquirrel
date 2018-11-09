@@ -3,7 +3,7 @@
 
 Inspired by the incredibly aggressive squirrels that climb up the (heavily oiled!) bird feeder pole in my backyard. Inspiration and end-goal is something like [this](https://www.slideshare.net/kgrandis/pycon-2012-militarizing-your-backyard-computer-vision-and-the-squirrel-hordes) fantastic Arduino + Python squirrel super soaker sentry from PyCon 2012.
 
-For now, just following in [Jinyang's](https://www.youtube.com/watch?v=vIci3C4JkL0) shoes. Is it a squirrel or not-squirrel?
+For now, just following in [Jian Yang's](https://www.youtube.com/watch?v=vIci3C4JkL0) shoes. Is it a squirrel or not-squirrel?
 
 Uses the following resources and libraries:
 
@@ -22,7 +22,7 @@ Coming as soon as I'm not too poor to get a iPhone to test on. :)
 
 # Screenshots
 
-<img src="./release/android/screenshots/android_1.png" height="480px" width="270px" /><img src="./release/android/screenshots/android_3.png" height="480px" width="270px" /><img src="./release/android/screenshots/android_4.png" height="480px" width="270px" />
+<img src="./release/android/screenshots/android_1.png" height="480px" width="270px" style="margin: 5px"/><img src="./release/android/screenshots/android_3.png" height="480px" width="270px" style="margin: 5px"/><img src="./release/android/screenshots/android_4.png" height="480px" width="270px" style="margin: 5px"/>
 
 # Build
 All commands should be run on `master` from the project root folder unless otherwise specified.
