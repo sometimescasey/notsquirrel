@@ -7,13 +7,22 @@ For now, just following in [Jinyang's](https://www.youtube.com/watch?v=vIci3C4Jk
 
 Uses the following resources and libraries:
 
-* `retrained_graph.pb` and `retrained_labels.txt` from a Tensorflow Lite graph retrained on images of squirrels and squirrel-like rodents, per the tutorial at [TensorFlow for Poets 2: TFLite Android](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2-tflite/#0)
-* Slightly modified fork of react-native-tensorflow ([Original](https://github.com/reneweb/react-native-tensorflow))([Fork](https://github.com/sometimescasey/react-native-tensorflow/tree/revision))
-* Slightly modified fork of react-native-image-picker ([Original](https://github.com/react-community/react-native-image-picker/))([Fork](https://github.com/sometimescasey/react-native-image-picker))
-* [react-native-fs](https://github.com/itinance/react-native-fs)
+* `retrained_graph.pb` and `retrained_labels.txt` from a Tensorflow Lite graph retrained on images of squirrels and squirrel-like rodents, per the tutorial at [TensorFlow for Poets](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/#0)
+* Modified fork of **react-native-tensorflow** ([Original](https://github.com/reneweb/react-native-tensorflow))([Fork](https://github.com/sometimescasey/react-native-tensorflow/tree/revision))
+* Modified fork of **react-native-image-picker** ([Original](https://github.com/react-community/react-native-image-picker/))([Fork](https://github.com/sometimescasey/react-native-image-picker))
+* [**react-native-fs**](https://github.com/itinance/react-native-fs)
 
 # Install
-Download the APK and install: (link tbd)
+## Android
+**Direct download:** Install the latest .apk from [./release/android/notsquirrel.apk](./release/android/notsquirrel.apk)<br>
+**App store:** TBD
+
+## iOS
+Coming as soon as I'm not too poor to get a iPhone to test on. :)
+
+# Screenshots
+
+<img src="./release/android/screenshots/android_1.png" height="480px" width="270px" /><img src="./release/android/screenshots/android_3.png" height="480px" width="270px" /><img src="./release/android/screenshots/android_4.png" height="480px" width="270px" />
 
 # Build
 All commands should be run on `master` from the project root folder unless otherwise specified.
