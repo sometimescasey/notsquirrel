@@ -1,5 +1,5 @@
 # notsquirrel
-(WIP) A silly React Native + Tensorflow Lite Android app to tell you whether or not something is a squirrel.
+A React Native + Tensorflow Lite Android app to tell you whether or not something is a squirrel.
 
 Inspired by the incredibly aggressive squirrels that climb up the (heavily oiled!) bird feeder pole in my backyard. Inspiration and end-goal is something like [this](https://www.slideshare.net/kgrandis/pycon-2012-militarizing-your-backyard-computer-vision-and-the-squirrel-hordes) fantastic Arduino + Python squirrel super soaker sentry from PyCon 2012.
 
